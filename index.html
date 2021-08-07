@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, user-scalable=0, minimal-ui" charset="utf-8">
+		<title>学生外出请假</title>
+		<style type="text/css">
+			.b{
+				font-weight: bold;
+				font-size: 16px;
+			}
+            .b1{
+				font-weight: bold;
+				font-size: 16px;
+                color: #ADADAD;
+			}
+			.location{
+				margin-top: 3vh;
+				height: 5vh;
+				padding: 7px;
+			}
+			.pass{
+				padding: 2px;
+				border: solid 1px #86b26f;
+				color: #86b26f;
+				font-size: 14px;
+			}
+            .nopass{
+                padding: 2px;
+				border: solid 1px #ADADAD;
+				color: #ADADAD;
+				font-size: 14px;
+            }
+			.main{
+				padding: 4px;
+				margin-right: 10px;
+			}
+			.main div{
+				display: flex;
+				justify-content: space-between;
+			}
+			.main p{
+				margin: 1px;
+			}
+			.text{
+				color: #707070;
+				font-size: small;
+			}
+            .text1{
+				color: #ADADAD;
+				font-size: small;
+			}
+			.red{
+				color: #c3342f;
+			}
+			.bottom{
+				position: absolute;
+				bottom:0;
+				text-align: center;
+				font-size: 15px;
+			}
+			.bottom div{
+				width: 90vw;
+				padding: 9px;
+				color: white;
+				background-color: #1a8afa;
+				border-radius: 6px;
+			}
+			.bottom p{
+				margin-left: 3vw;
+				margin-right: 5vw;
+				font-size: small;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="location">
+			<span class="b">我的位置:<span class="red">*</span></span>
+			<span style="padding-left: 12vw; font-size: 15px;"><img src="cycle.svg" height="15px">    山西大学</span>
+		</div>
+		<hr size=1px color=#F5F5F5>
+		<div class="main">
+			<p class="b">请选择请假条:<span class="red">*</span></p>
+			<br>
+			<div>
+				<span class="b" contenteditable="false">假条编号: 331698</span> <span class="pass">已通过</span>
+			</div>
+			<p class="text" style="margin-top: 8px">事由：买药</p>
+			<p class="text">去向：山西省 太原市 小店区 <img src="check.svg" height="22px" style="margin-left: 40vw;  filter: invert(47%) sepia(24%) saturate(6126%) hue-rotate(188deg) brightness(97%) contrast(94%);"></p>
+			<p class="text" style="margin-top: 8px;">假期：<span id="date1">DATE1 </span> 08:00~ 
+			<span id="date2">DATE2 </span> 23:30</p>
+		</div>
+        <br>
+		<hr size=1px color=#F5F5F5>
+        <br>
+        <div class="main">
+            <div>
+				<span class="b1" contenteditable="false">假条编号: 244852</span> <span class="nopass">已失效</span>
+			</div>
+			<p class="text1" style="margin-top: 8px">事由：买药</p>
+			<p class="text1">去向：山西省 太原市 小店区 <img src="nocheck.svg" height="23px" style="margin-left: 40vw;  "></p>
+			<p class="text1" style="margin-top: 8px;">假期：2020-12-23 15:00~2020-12-23 23:49
+		</div>
+        <br>
+        <hr size=1px color=#F5F5F5>
+        <br>
+        <div class="main">
+            <div>
+				<span class="b1" contenteditable="false">假条编号: 201423</span> <span class="nopass">已失效</span>
+			</div>
+			<p class="text1" style="margin-top: 8px">事由：回家</p>
+			<p class="text1">去向：山西省 长治市  <img src="nocheck.svg" height="23px" style="margin-left: 40vw;  "></p>
+			<p class="text1" style="margin-top: 8px;">假期：2020-09-30 05:30~2020-10-04 21:00
+		</div>
+		<div class="bottom">
+			<a href="LX_after.html" style="text-decoration: none;"><div>
+				确认外出
+			</div></a>
+			<p class="red b">警告:一旦确认外出，180秒内必须离开学校，否则请假失效！</p>
+		</div>
+	</body>
+	<script>
+		//to mimic dates auto.
+		var today = new Date();
+		var y = today.getFullYear();
+		var m = today.getMonth()+1;
+		var d = today.getDate();
+        if(m<10){
+            m="0"+m
+        }
+        if(d<10){
+            d="0"+d
+        }
+		document.getElementById('date1').innerHTML= y+"-"+m+"-"+d;
+		document.getElementById('date2').innerHTML = y+"-"+m+"-"+d;
+	</script>
+</html>
+

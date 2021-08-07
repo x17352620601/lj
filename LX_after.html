@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+<script src="qrcode.min.js"></script>
+</script>
+		<meta name="viewport" content="initial-scale=1, user-scalable=0, minimal-ui" charset="utf-8">
+		<meta charset="utf-8">
+		<title>学生外出请假</title>
+		<style type="text/css">
+			body, html{
+				background-color: #e1edfe;
+				margin: 0;
+			}
+			.topcard{
+				font-family: "comic sans ms";
+				font-size: 15px;
+				background-color: #1eb2b1;
+				height: 22vh;
+				padding: 5vw;
+				margin: 2vh 5vw 0 5vw;
+				width: 80vw;
+				border-radius: 10px;
+				color: white;
+				display:grid;
+				grid-template-columns: 65% 35%;
+			}
+			.topcard div{
+				margin-bottom: 0;
+			}
+			.pic{
+				height: 100%;
+				background-color: red;
+				background-image: url("1.jpg");
+				background-size: cover;
+			}
+			.topcard p{
+				padding-top: 2px;
+				margin-top: 1px;
+				margin-bottom: 1px;
+				padding-left: 5px;
+			}
+			.main{
+				background-color: #ffffff;
+				height: 46vh;
+				margin-left: 10vw;
+				width: 80vw;
+				border-radius: 0px 0px 10px 10px;
+				box-shadow:inset 0px 16px 15px -11px #a5d1cf;
+			}
+            #qr{
+                position: relative;
+                left: 9vw;
+                top: 7.5vh;
+            }
+
+			#time{
+				padding-left: 10px;
+				color:#ff2a2a;
+			}
+			#timer{
+				font-weight: 900;
+				color:#fe3434;
+				font-size: 5em;
+				position: absolute;
+				z-index: 10;
+				padding-top: 18vh;
+				padding-left: 20%;
+				
+				-webkit-text-stroke: #fff003 2px;
+			}
+			.bottom{
+				margin-left: 0;
+				margin-right: 0;
+				margin-top: 4vh;
+				width: 100vw;
+				text-align: center;
+				font-weight: 200;
+				font-size: 12px;
+				color: #8d8f91;
+			}
+			[contenteditable="false"]{
+				transition: 200ms background-color;
+			}
+			[contenteditable="false"]:focus{
+				background-color:#265973;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="topcard">
+			<div>
+			<p style="font-weight: 700; padding-top: 5px; font-size: 23px; padding: 4px;" contenteditable="false">
+				<span id="surname">吕</span><span id="givenname">靖</span>
+			</p>
+			<p contenteditable="false">
+				学号：20<span>20</span>22<span>61</span><span>60</span><span>71</span>
+			</p>
+			<p contenteditable="false">
+				班级：物理电子工程学院
+			</p>
+			<p contenteditable="false">
+				开始：<span id="date1"></span> 08:00
+			</p>
+			<p contenteditable="false">
+				结束：<span id="date2"></span> 23:30
+			</p>
+			</div>
+			<div class="pic"><img id="output" style="overflow: hidden; height: 100%; width: 100%; min-height: 100%; max-height: 100%;"/>
+			</div>
+		</div>
+		
+		<div class="main">
+			<span id="timer"><span id="countdown">180</span>S</span>
+            <div  class="qrContainer green" id="qr"></div>
+		</div>
+        
+		<p class="bottom">请尽快向保安出示该页面，倒计时结束后页面将失效</p>
+		<script>
+            //countdown time from 180 sec.
+			var timeleft = 180;
+			var timer = setInterval(function(){
+				timeleft--;
+				document.getElementById("countdown").textContent = timeleft;
+				if (timeleft <=0)
+					clearInterval(timer)},1000);
+		</script>
+		<script>
+			var a = Math.floor((Math.random()*9)+1);
+			var x = Math.floor(a+10);
+			
+		</script>
+		<script>
+            //date
+			var today = new Date();
+			var y = today.getFullYear();
+			var m = today.getMonth() + 1;
+			var d = today.getDate();
+            if(m<10){
+            m="0"+m
+            }
+            if(d<10){
+            d="0"+d
+            }
+			document.getElementById('date1').innerHTML = y+"-"+m+"-"+d;
+			document.getElementById('date2').innerHTML = y+"-"+m+"-"+d;
+		</script>
+        <script>
+            var qrcode = new QRCode(document.getElementsByClassName("qrContainer green")[0], {
+            width : 256,
+            height : 256,
+            colorDark: "#179702"
+        });
+                var ajaxObj = new XMLHttpRequest();
+                ajaxObj.open('post', 'http://noleave.sxu.edu.cn/jcforms/plus/api/getRandom');
+                ajaxObj.send()
+                ajaxObj.onreadystatechange = function () {
+                    if (ajaxObj.readyState == 4 && ajaxObj.status == 200) {
+                        qrcode.makeCode(JSON.parse(ajaxObj.responseText)['msg']);
+                    }
+                }
+        </script>
+	</body>
+</html>
